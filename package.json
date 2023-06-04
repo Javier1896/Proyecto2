@@ -1,0 +1,22 @@
+{
+  "name": "fiverdona",
+  "version": "1.0.0",
+  "description": "Plataforma que permita gestionar una web donde personas que necesiten algún servicio digital puedan pedir ayuda a otros usuarios.",
+  "main": "server.js",
+  "scripts": {
+    "dev": "nodemon",
+    "initDB": "node ./db/initDB.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.1.2",
+    "express": "^4.18.2",
+    "mysql2": "^3.3.3"
+  },
+  "devDependencies": {
+    "eslint": "^8.41.0",
+    "nodemon": "^2.0.22"
+  }
+}
