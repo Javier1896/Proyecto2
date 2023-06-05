@@ -1,15 +1,16 @@
 require('dotenv').config();
 
 const express = require('express');
-const morgan = require ('morgan');
+const morgan = require('morgan');
 
 const app = express();
 app.use(morgan('dev'));
 
+const { newUser } = require('./controllers/users');
+
+app.post('/users', newUser);
 
 //Rutas
-
-
 
 //Middleware de 404
 
@@ -35,5 +36,7 @@ app.use((error, req, res, next) => {
 const process = require('process');
 
 app.listen(process.env.PORT, () => {
-  console.log(`Servidor funcionando at http://localhost:${process.env.PORT}!!🐱‍🏍`);
+  console.log(
+    `Servidor funcionando at http://localhost:${process.env.PORT}!!🐱‍🏍`
+  );
 });
