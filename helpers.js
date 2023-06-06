@@ -6,6 +6,20 @@ const generateError = (msg, code) => {
   throw err;
 };
 
+
+// Validate Schema.
+
+const validateSchema = async (schema, data) => {
+  try {
+    await schema.validateAsync(data);
+  } catch (err) {
+    err.httpStatus = 400;
+    throw err;
+    
+  }
+};
+
 module.exports = {
   generateError,
+  validateSchema,
 };
