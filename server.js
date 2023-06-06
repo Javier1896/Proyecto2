@@ -9,6 +9,10 @@ app.use(express.json());
 
 app.use(morgan('dev'));
 
+// middleware personalizados
+const authUser = require('./middlewares/authUser');
+const userExists = require('./middlewares/userExists');
+
 const { 
   newUser, 
   loginUser, 
@@ -30,7 +34,7 @@ app.post('/users/login', loginUser);
 app.get('/users/:userId', getUser);
 
 // Obtener información del usuario del token (nuestro usuario).
-app.get('/users', getOwnUser);
+app.get('/users', authUser, userExists, getOwnUser);
 
 //Middleware de 404
 
