@@ -13,13 +13,13 @@ app.use(morgan('dev'));
 const authUser = require('./middlewares/authUser');
 const userExists = require('./middlewares/userExists');
 
-const { 
-  newUser, 
-  loginUser, 
-  getUser, 
+const {
+  newUser,
+  loginUser,
+  getUser,
   getOwnUser,
+  editUserAvatar,
 } = require('./controllers/users');
-
 
 //Rutas
 //Registro de usuario.
@@ -27,7 +27,6 @@ const {
 app.post('/users', newUser);
 
 // Login de usuario.
-
 app.post('/users/login', loginUser);
 
 // Obtener información del perfil de un usuario.
@@ -35,6 +34,9 @@ app.get('/users/:userId', getUser);
 
 // Obtener información del usuario del token (nuestro usuario).
 app.get('/users', authUser, userExists, getOwnUser);
+
+// Editar avatar de usuario.
+app.put('/users/avatar', authUser, userExists, editUserAvatar);
 
 //Middleware de 404
 
