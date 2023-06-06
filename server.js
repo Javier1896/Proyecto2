@@ -9,7 +9,12 @@ app.use(express.json());
 
 app.use(morgan('dev'));
 
-const { newUser, loginUser } = require('./controllers/users');
+const { 
+  newUser, 
+  loginUser, 
+  getUser, 
+  getOwnUser,
+} = require('./controllers/users');
 
 
 //Rutas
@@ -20,6 +25,12 @@ app.post('/users', newUser);
 // Login de usuario.
 
 app.post('/users/login', loginUser);
+
+// Obtener información del perfil de un usuario.
+app.get('/users/:userId', getUser);
+
+// Obtener información del usuario del token (nuestro usuario).
+app.get('/users', getOwnUser);
 
 //Middleware de 404
 
