@@ -9,6 +9,7 @@ const newUser = async (req, res, next) => {
     if (!email || !username || !password) {
       generateError('Faltan campos', 400);
     }
+    await insertUserQuery(email, username, password);
 
     res.send({
       status: 'ok',

@@ -4,13 +4,22 @@ const express = require('express');
 const morgan = require('morgan');
 
 const app = express();
+
+app.use(express.json());
+
 app.use(morgan('dev'));
 
-const { newUser } = require('./controllers/users');
+const { newUser, loginUser } = require('./controllers/users');
+
+
+//Rutas
+//Registro de usuario.
 
 app.post('/users', newUser);
 
-//Rutas
+// Login de usuario.
+
+app.post('/users/login', loginUser);
 
 //Middleware de 404
 

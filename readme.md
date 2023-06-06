@@ -35,7 +35,7 @@ Plataforma que permita gestionar una web donde personas que necesiten algún ser
 
 ### Usuarios:
 
-- POST [/users/register] - Registro de un nuevo usuario.
+- POST [/users/] - Registro de un nuevo usuario.
 - POST [/users/login] - Permite logear un usuario.
 - GET [/users] - Devuelve informacion de mi propio usuario. Token.
 - GET [/users/avatar] - Cambia el avatar de un usuario. Token.
