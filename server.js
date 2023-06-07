@@ -7,11 +7,14 @@ const app = express();
 
 app.use(express.json());
 
+app.use(fileUpload());
+
 app.use(morgan('dev'));
 
 // middleware personalizados
 const authUser = require('./middlewares/authUser');
 const userExists = require('./middlewares/userExists');
+const fileUpload = require('express-fileupload');
 
 const {
   newUser,
