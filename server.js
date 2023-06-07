@@ -41,7 +41,10 @@ app.get('/users', authUser, userExists, getOwnUser);
 // Editar avatar de usuario.
 app.put('/users/avatar', authUser, userExists, editUserAvatar);
 
-const { newService } = require('./controllers/services/newService');
+const { newService } = require('./controllers/services');
+
+//crear nuevo Servicio
+app.post ('/services', authUser, userExists, newService)
 
 //Middleware de 404
 

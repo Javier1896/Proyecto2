@@ -1,4 +1,3 @@
-//const [error] = require('console');
 const fs = require('fs/promises');
 const path = require('path');
 const sharp = require('sharp');
@@ -74,7 +73,7 @@ const savePhoto = async (img, width) => {
 
 const deletePhoto = async (imgName) => {
   try {
-    // Ruta absoluta al archivo que queremos elimiar.
+    // Ruta absoluta al archivo que queremos eliminar.
     const imgPath = path.join(__dirname, UPLOADS_DIR, imgName);
 
     try {

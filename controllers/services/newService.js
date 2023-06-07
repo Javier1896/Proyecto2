@@ -1,8 +1,6 @@
 const { generateError, saveFile } = require('../../helpers');
 
-const {
-  insertServiceQuery,
-} = require('../../db/queries/services/insertServiceQuery');
+const insertServiceQuery = require('../../db/queries/services/insertServiceQuery');
 
 const newService = async (req, res, next) => {
   try {
@@ -12,10 +10,12 @@ const newService = async (req, res, next) => {
       generateError('Faltan campos', 400);
     }
 
+    // Variable que almacenará un nombre de archivo (si existe).
     let fileName;
 
-    if (!req.files?.file) {
+    if (req.files?.file) {
       fileName = await saveFile(req.files.file);
+      console.log(fileName)
     }
 
     const service = await insertServiceQuery(
