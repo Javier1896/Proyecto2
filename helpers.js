@@ -56,7 +56,7 @@ const savePhoto = async (img, width) => {
     const imgPath = path.join(uploadsPath, imgName);
 
     // Guardamos la imagen.
-    sharpImg.toFile(imgPath);
+    await sharpImg.toFile(imgPath);
 
     // Retornamos el nombre de la imagen.
     return imgName;
@@ -92,9 +92,45 @@ const deletePhoto = async (imgName) => {
   }
 };
 
+const saveFile = async (file) => {
+  try {
+    // Ruta absoluta al directorio de subida de archivos.
+    const uploadsPath = path.join(__dirname, UPLOADS_DIR);
+
+    try {
+      await fs.access(uploadsPath);
+    } catch {
+      // Si el método access lanza un error significa que la directorio no existe.
+      // Lo creamos.
+      await fs.mkdir(uploadsPath);
+    }
+
+    //Obtenemos la extensión del archivo
+
+    const fileExt = file.name.split('.').pop();
+
+    // Generamos un nombre único para el archivo dado que no podemos guardar dos archivos
+    // con el mismo nombre en la carpeta uploads.
+    const fileName = `${uuid()}.${fileExt}`;
+
+    // Ruta absoluta al archivo.
+    const filePath = path.join(uploadsPath, fileName);
+
+    // Guardamos el archivo.
+    await file.mv(filePath);
+
+    // Retornamos el nombre del archivo.
+    return fileName;
+  } catch (err) {
+    console.error(err);
+    generateError('Error al guardar el archivo en el servidor', 500);
+  }
+};
+
 module.exports = {
   generateError,
   validateSchema,
   savePhoto,
   deletePhoto,
+  saveFile,
 };

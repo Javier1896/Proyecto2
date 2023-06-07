@@ -1,6 +1,7 @@
 require('dotenv').config();
 
 const express = require('express');
+const fileUpload = require('express-fileupload');
 const morgan = require('morgan');
 
 const app = express();
@@ -14,7 +15,6 @@ app.use(morgan('dev'));
 // middleware personalizados
 const authUser = require('./middlewares/authUser');
 const userExists = require('./middlewares/userExists');
-const fileUpload = require('express-fileupload');
 
 const {
   newUser,
@@ -40,6 +40,8 @@ app.get('/users', authUser, userExists, getOwnUser);
 
 // Editar avatar de usuario.
 app.put('/users/avatar', authUser, userExists, editUserAvatar);
+
+const { newService } = require('./controllers/services/newService');
 
 //Middleware de 404
 
