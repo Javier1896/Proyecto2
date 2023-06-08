@@ -12,10 +12,14 @@ app.use(fileUpload());
 
 app.use(morgan('dev'));
 
-// middleware personalizados
+
+// middleware personalizados:
 const authUser = require('./middlewares/authUser');
+const authUserOptional = require('./middlewares/authUserOptional');
 const userExists = require('./middlewares/userExists');
 
+
+// middlewares usuarios:
 const {
   newUser,
   loginUser,
@@ -24,9 +28,9 @@ const {
   editUserAvatar,
 } = require('./controllers/users');
 
-//Rutas
-//Registro de usuario.
+//Rutas:
 
+//Registro de usuario.
 app.post('/users', newUser);
 
 // Login de usuario.
@@ -41,13 +45,17 @@ app.get('/users', authUser, userExists, getOwnUser);
 // Editar avatar de usuario.
 app.put('/users/avatar', authUser, userExists, editUserAvatar);
 
-const { newService } = require('./controllers/services');
+const { newService, listService, listServices } = require('./controllers/services');
 
-//crear nuevo Servicio
-app.post ('/services', authUser, userExists, newService)
+// Crear nuevo Servicio.
+app.post ('/services', authUser, userExists, newService);
+
+// Listar los servicios.
+app.get('/services', authUserOptional, listServices)
+
+
 
 //Middleware de 404
-
 app.use((req, res) => {
   res.status(404).send({
     status: 'error',
@@ -56,7 +64,6 @@ app.use((req, res) => {
 });
 
 //Middleware de gestión de errores
-
 app.use((error, req, res, next) => {
   console.error(error);
 

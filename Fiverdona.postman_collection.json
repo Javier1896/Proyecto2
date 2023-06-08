@@ -210,6 +210,14 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "List services",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
 				}
 			]
 		}
