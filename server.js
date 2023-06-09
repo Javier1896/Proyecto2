@@ -25,7 +25,9 @@ const {
   loginUser,
   getUser,
   getOwnUser,
+  editUser,
   editUserAvatar,
+  editUserPass,
 } = require('./controllers/users');
 
 //Rutas:
@@ -36,16 +38,29 @@ app.post('/users', newUser);
 // Login de usuario.
 app.post('/users/login', loginUser);
 
+// Editar el email o el nombre de usuario.
+app.put('/users', authUser, userExists, editUser);
+
+// Editar contraseña de usuario.
+app.put('/users/password',authUser, userExists, editUserPass)
+
 // Obtener información del perfil de un usuario.
 app.get('/users/:userId', getUser);
 
 // Obtener información del usuario del token (nuestro usuario).
 app.get('/users', authUser, userExists, getOwnUser);
 
+
+
 // Editar avatar de usuario.
 app.put('/users/avatar', authUser, userExists, editUserAvatar);
 
-const { newService, listService, listServices } = require('./controllers/services');
+// middlewares servicios:
+
+const { 
+  newService, 
+  listServices, 
+} = require('./controllers/services');
 
 // Crear nuevo Servicio.
 app.post ('/services', authUser, userExists, newService);

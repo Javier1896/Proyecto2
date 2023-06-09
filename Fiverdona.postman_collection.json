@@ -15,7 +15,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"email@email.com\",\r\n    \"username\": \"manolo\",\r\n    \"password\": \"12345678\"\r\n}",
+							"raw": "{\r\n    \"email\": \"email@email.com\",\r\n    \"username\": \"lola\",\r\n    \"password\": \"123456789Aa.\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -43,7 +43,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"email@email.com\",\r\n    \"password\": \"123456\"\r\n}",
+							"raw": "{\r\n    \"email\": \"email@email.com\",\r\n    \"password\": \"123456789Aa.\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -68,6 +68,7 @@
 				{
 					"name": "Get Own User",
 					"protocolProfileBehavior": {
+						"disableBodyPruning": true,
 						"disabledSystemHeaders": {}
 					},
 					"request": {
@@ -79,6 +80,15 @@
 								"type": "default"
 							}
 						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "http://localhost:8080/users",
 							"protocol": "http",
@@ -140,9 +150,9 @@
 							"mode": "formdata",
 							"formdata": [
 								{
-									"key": "Avatar",
-									"value": "The-Legend-Of-Zelda-Ocarina-Of-Time-Free-PNG.png",
-									"type": "default"
+									"key": "avatar",
+									"type": "file",
+									"src": "/C:/Users/donce/Desktop/zeldaLink.png"
 								}
 							]
 						},
@@ -156,6 +166,75 @@
 							"path": [
 								"users",
 								"avatar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit User",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token_user_01}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"email@gmail.com\"\r\n \r\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit User Pass",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token_user_02}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"currentPass\": \"123456789Aa.\",\r\n    \"newPass\": \"123456789Aa.\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/users/password",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"password"
 							]
 						}
 					},
@@ -182,18 +261,18 @@
 							"formdata": [
 								{
 									"key": "title",
-									"value": "traduccion",
+									"value": "web",
 									"type": "default"
 								},
 								{
 									"key": "description",
-									"value": "repaso",
+									"value": "set",
 									"type": "default"
 								},
 								{
 									"key": "file",
 									"type": "file",
-									"src": "/C:/Users/donce/Desktop/Ojeador deportivo.pdf"
+									"src": "/C:/Users/donce/Desktop/Portal de necesidades.pdf"
 								}
 							]
 						},
@@ -215,7 +294,24 @@
 					"name": "List services",
 					"request": {
 						"method": "GET",
-						"header": []
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/services?keyword=web",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"services"
+							],
+							"query": [
+								{
+									"key": "keyword",
+									"value": "web"
+								}
+							]
+						}
 					},
 					"response": []
 				}
@@ -245,6 +341,11 @@
 	"variable": [
 		{
 			"key": "token_user_01",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "token_user_02",
 			"value": "",
 			"type": "default"
 		}
