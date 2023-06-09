@@ -14,6 +14,7 @@ app.use(morgan('dev'));
 
 // middleware personalizados
 const authUser = require('./middlewares/authUser');
+const authUserOptional = require('./middlewares/authUserOptional');
 const userExists = require('./middlewares/userExists');
 
 const {
@@ -44,10 +45,12 @@ app.put('/users/avatar', authUser, userExists, editUserAvatar);
 const { newService } = require('./controllers/services');
 
 //crear nuevo Servicio
-app.post ('/services', authUser, userExists, newService)
+app.post('/services', authUser, userExists, newService);
+
+//Ofrece informacion detallada de un servicio junto a sus comentarios.
+app.get('/services/:serviceId', authUserOptional);
 
 //Middleware de 404
-
 app.use((req, res) => {
   res.status(404).send({
     status: 'error',
