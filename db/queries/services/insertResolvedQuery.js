@@ -28,4 +28,4 @@ const insertResolvedQuery = async (value, entryId, userId) => {
   }
 };
 
-module.exports = insertVoteQuery;
+module.exports = insertResolvedQuery;

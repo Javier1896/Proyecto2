@@ -1,3 +1,5 @@
 const newService = require('./newService');
 
-module.exports = { newService };
+const resolvedService = require('./ResolvedService');
+
+module.exports = { newService, resolvedService };

@@ -8,7 +8,7 @@ const selectServiceByIdQuery = async (entryId, userId = 0) => {
   try {
     connection = await getDB();
 
-    const [entries] = await connection.query(
+    const [services] = await connection.query(
       `
                 SELECT
                     S.id,
@@ -18,11 +18,11 @@ const selectServiceByIdQuery = async (entryId, userId = 0) => {
                     U.username,
                     S.userId,
                     S.userId = ? AS owner,
-                    AVG(IFNULL(V.value, 0)) AS votes,
+                    AVG(IFNULL(V.value, 0)) AS ,
                     S.createdAt
                 FROM services S
                 INNER JOIN users U ON U.id = E.userId
-                LEFT JOIN services V ON E.id = V.entryId
+                LEFT JOIN services V ON E.id = V.serviceId
                 WHERE E.id = ?
                 GROUP BY E.id
                 ORDER BY E.createdAt DESC
@@ -36,7 +36,7 @@ const selectServiceByIdQuery = async (entryId, userId = 0) => {
     }
 
     // Llegados a este punto sabemos que existe una entrada y que está en la
-    // posición 0 del array. Vamos a obtener los archivos  (si tiene).
+    // posición 0 del array. Vamos a obtener los archivos (si tiene).
     const [files] = await connection.query(
       `SELECT id, name FROM servicesFiles WHERE entryId = ?`,
       [entries[0].id]
