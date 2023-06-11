@@ -14,7 +14,7 @@ const selectServiceByIdQuery = async (serviceId, userId = 0) => {
                     S.id,
                     S.title,
                     S.description,
-                    S.file
+                    S.fileName
                     S.resolved
                     C.text
                     C.serviceId
