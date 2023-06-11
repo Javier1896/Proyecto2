@@ -22,7 +22,6 @@ const selectServiceByIdQuery = async (serviceId, userId = 0) => {
                     U.username,
                     C.userId,
                     C.userId = ? AS owner,
-                    AVG(IFNULL(V.value, 0)) AS votes,
                     E.createdAt
     
     
