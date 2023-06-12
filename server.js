@@ -18,6 +18,10 @@ const authUserOptional = require('./middlewares/authUserOptional');
 const userExists = require('./middlewares/userExists');
 
 const {
+  getService
+} = require('./controllers/services');
+
+const {
   newUser,
   loginUser,
   getUser,
