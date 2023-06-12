@@ -20,8 +20,8 @@ const selectServiceByIdQuery = async (serviceId, userId = 0) => {
                     S.userId = ? AS owner,
                     S.createdAt,
                 FROM services S
-                INNER JOIN users U ON U.id = E.userId
-                WHERE E.id = ?
+                INNER JOIN users U ON U.id = S.userId
+                WHERE S.id = ?
             `,
       [userId, serviceId]
     );
@@ -34,8 +34,8 @@ const selectServiceByIdQuery = async (serviceId, userId = 0) => {
     // Llegados a este punto sabemos que existe una entrada y que está en la
     // posición 0 del array. Vamos a obtener los archivos (si tiene).
     const [files] = await connection.query(
-      `SELECT id, name FROM servicesFiles WHERE entryId = ?`,
-      [entries[0].id]
+      `SELECT id, name FROM servicesFiles WHERE serviceId = ?`,
+      [servicess[0].id]
     );
 
     // Devolvemos los datos de la entrada junto a sus fotos.
