@@ -17,12 +17,12 @@ const selectServiceByIdQuery = async (serviceId, userId = 0) => {
                     S.fileName
                     S.resolved
                     C.text
-                    C.serviceId
                     C.fileName
+                    C.serviceId
                     U.username,
                     C.userId,
                     C.userId = ? AS owner,
-                    E.createdAt
+                    C.createdAt
     
     
                 FROM services S
