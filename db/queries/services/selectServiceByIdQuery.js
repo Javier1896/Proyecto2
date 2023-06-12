@@ -27,8 +27,8 @@ const selectServiceByIdQuery = async (serviceId, userId = 0) => {
     
                 FROM services S
                 INNER JOIN users U ON U.id = C.userId
-                GROUP BY E.id
-                ORDER BY E.createdAt DESC
+                GROUP BY C.id
+                ORDER BY C.createdAt DESC
             `,
       [userId]
     );
