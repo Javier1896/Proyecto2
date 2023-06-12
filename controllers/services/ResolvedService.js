@@ -13,16 +13,10 @@ const resolvedService = async (req, res, next) => {
 
     // Si no somos los dueños del servicio lanzamos un error.
     if (!service.owner) {
-      generateError('No puedes finalizar otra tarea', 403);
+      generateError('No puedes finaliz ésta tarea', 403);
     }
 
-    // Finalizamos la tarea.
-    const resolvedsAvg = await insertResolvedQuery(
-      value,
-      serviceId,
-      req.user.id
-    );
-
+  
     res.send({
       status: 'ok',
       data: {
