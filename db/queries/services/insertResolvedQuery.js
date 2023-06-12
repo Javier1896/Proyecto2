@@ -2,15 +2,15 @@ const getDB = require('../../getDB');
 
 const { generateError } = require('../../../helpers');
 
-const insertResolvedQuery = async (value, entryId, userId) => {
+const insertResolvedQuery = async (value, serviceId, userId) => {
   let connection;
 
   try {
     connection = await getDB();
 
     // Comprobamos si el usuario ya ha finalizado la tarea.
-    let [resolved] = await connection.query(
-      `SELECT id FROM resolvedService WHERE userId = ? AND entryId = ?`,
+    let [resolvedService] = await connection.query(
+      `SELECT id FROM resolvedService WHERE userId = ? AND serviceId = ?`,
       [userId, entryId]
     );
 
@@ -20,8 +20,8 @@ const insertResolvedQuery = async (value, entryId, userId) => {
 
     // Marcamos como resuelto.
     await connection.query(
-      `INSERT INTO resolvedService(value, entryId, userId, createdAt) VALUES(?, ?, ?, ?)`,
-      [value, entryId, userId, new Date()]
+      `INSERT INTO resolvedService(value, serviceId, userId, createdAt) VALUES(?, ?, ?, ?)`,
+      [value, serviceId, userId, new Date()]
     );
   } finally {
     if (connection) connection.release();
