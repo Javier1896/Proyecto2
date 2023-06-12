@@ -18,18 +18,12 @@ const selectServiceByIdQuery = async (serviceId, userId = 0) => {
                     S.resolved
                     S.userId,
                     S.userId = ? AS owner,
-                    C.text
-                    C.fileName
-                    C.serviceId
                     U.username,
-                    C.createdAt
-    
+
     
                 FROM services S
                 INNER JOIN users U ON U.id = S.userId
                 WHERE S.id = ?
-                GROUP BY C.id
-                ORDER BY C.createdAt DESC
             `,
       [userId, serviceId]
     );
@@ -42,7 +36,7 @@ const selectServiceByIdQuery = async (serviceId, userId = 0) => {
     // Llegados a este punto sabemos que existe una entrada y que está en la
     // posición 0 del array. Vamos a obtener la información(si tiene).
     const [service] = await connection.query(
-      `SELECT id, name FROM service WHERE serviceId = ?`,
+      `SELECT id, title FROM services WHERE services.Id = ?`,
       [services[0].id]
     );
 
