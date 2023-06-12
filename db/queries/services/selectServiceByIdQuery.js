@@ -2,30 +2,26 @@ const getDB = require('../../getDB');
 
 const { generateError } = require('../../../helpers');
 
-const selectServiceByIdQuery = async (entryId, userId = 0) => {
+const selectServiceByIdQuery = async (serviceId, userId = 0) => {
   let connection;
 
   try {
     connection = await getDB();
 
-    const [services] = await connection.query(
+    const [servicesId] = await connection.query(
       `
                 SELECT
                     S.id,
                     S.title,
                     S.description,
-                    S.file
+                    S.file,
                     U.username,
                     S.userId,
                     S.userId = ? AS owner,
-                    AVG(IFNULL(V.value, 0)) AS ,
-                    S.createdAt
+                    S.createdAt,
                 FROM services S
                 INNER JOIN users U ON U.id = E.userId
-                LEFT JOIN services V ON E.id = V.serviceId
                 WHERE E.id = ?
-                GROUP BY E.id
-                ORDER BY E.createdAt DESC
             `,
       [userId, serviceId]
     );
