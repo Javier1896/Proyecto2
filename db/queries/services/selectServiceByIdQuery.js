@@ -16,21 +16,22 @@ const selectServiceByIdQuery = async (serviceId, userId = 0) => {
                     S.description,
                     S.fileName
                     S.resolved
+                    S.userId,
+                    S.userId = ? AS owner,
                     C.text
                     C.fileName
                     C.serviceId
                     U.username,
-                    C.userId,
-                    C.userId = ? AS owner,
                     C.createdAt
     
     
                 FROM services S
-                INNER JOIN users U ON U.id = C.userId
+                INNER JOIN users U ON U.id = S.userId
+                WHERE S.id = ?
                 GROUP BY C.id
                 ORDER BY C.createdAt DESC
             `,
-      [userId]
+      [userId, serviceId]
     );
 
     // Si no hay información lanzamos un error.
