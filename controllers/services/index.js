@@ -1,3 +1,3 @@
 const newService = require('./newService');
-
-module.exports = { newService };
+const newComment = require('./newComment');
+module.exports = { newService, newComment };
