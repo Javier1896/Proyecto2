@@ -8,7 +8,7 @@ const selectServiceByIdQuery = async (serviceId, userId = 0) => {
   try {
     connection = await getDB();
 
-    const [servicesId] = await connection.query(
+    const [services] = await connection.query(
       `
                 SELECT
                     S.id,
