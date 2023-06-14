@@ -1,4 +1,4 @@
-const insertCommentQuery = require('../../db/queries/services/insertServiceQuery');
+const insertCommentQuery = require('../../db/queries/services/insertCommentQuery');
 
 const { generateError } = require('../../helpers');
 
@@ -15,7 +15,7 @@ const newComment = async (req, res, next) => {
     res.send({
       status: 'ok',
       data: {
-        comment: { ...comment },
+        comment,
       },
     });
   } catch (err) {
