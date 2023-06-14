@@ -2,13 +2,14 @@ const jwt = require('jsonwebtoken');
 const { generateError } = require('../helpers');
 
 const authUserOptional = async (req, res, next) => {
+  
     try {
         const { authorization } = req.headers;
 
        // Si hay token creamos la propiedad user en el objeto request. Cabe la posibilidad
         // de que recibamos un valor "null" como String por lo que evitaremos entrar en este
         // if si se da el caso.
-        if (authorization /* && authorization !== 'null' */) {
+        if (!authorization /* && authorization !== 'null' */) {
             // Variable que almacenará la info del token una vez desencriptada.
             let tokenInfo;
 
@@ -24,8 +25,9 @@ const authUserOptional = async (req, res, next) => {
         // Pasamos el control a la siguiente función controladora.
         next();
     } catch (err) {
-        next(err);
+      next(err);
     }
+
 };
 
 module.exports = authUserOptional;

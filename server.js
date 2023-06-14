@@ -20,6 +20,7 @@ const userExists = require('./middlewares/userExists');
 
 
 // middlewares usuarios:
+
 const {
   newUser,
   loginUser,
@@ -57,17 +58,21 @@ app.put('/users/avatar', authUser, userExists, editUserAvatar);
 
 // middlewares servicios:
 
+
 const { 
   newService, 
-  listServices, 
+  listServices,
+  getService,
 } = require('./controllers/services');
+
+//Ofrece informacion detallada de un servicio junto a sus comentarios.
+app.get('/services/:serviceId', authUserOptional);
 
 // Crear nuevo Servicio.
 app.post ('/services', authUser, userExists, newService);
 
 // Listar los servicios.
 app.get('/services', authUserOptional, listServices)
-
 
 
 //Middleware de 404
