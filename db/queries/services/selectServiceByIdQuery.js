@@ -13,13 +13,13 @@ const selectServiceByIdQuery = async (serviceId, userId = 0) => {
                 SELECT
                     S.id,
                     S.title,
-                    S.description,
+                    S.description,    
                     S.fileName,
                     S.resolved,
                     U.username,
                     S.userId,
                     S.userId = ? AS owner,
-                    S.createdAt
+                    S.createdAt  
                 FROM services S
                 INNER JOIN users U ON U.id = S.userId
                 WHERE S.id = ?
@@ -32,10 +32,8 @@ const selectServiceByIdQuery = async (serviceId, userId = 0) => {
       generateError('Entrada no encontrada', 404);
     }
 
-    // Devolvemos los datos de la entrada junto a sus fotos.
     return {
       ...services[0],
-      files,
     };
   } finally {
     if (connection) connection.release();
