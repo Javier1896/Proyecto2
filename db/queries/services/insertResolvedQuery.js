@@ -9,19 +9,19 @@ const insertResolvedQuery = async (value, serviceId, userId) => {
     connection = await getDB();
 
     // Comprobamos si el usuario ya ha finalizado la tarea.
-    let [resolvedService] = await connection.query(
-      `SELECT id FROM resolvedService WHERE userId = ? AND serviceId = ?`,
+    let [services] = await connection.query(
+      `SELECT resolved FROM services WHERE serviceId = ?`,
       [userId, entryId]
     );
 
-    if (resolvedService.length > 0) {
+    if (services[0].resolved) {
       generateError('Ya has finalizado esta tarea', 403);
     }
 
     // Marcamos como resuelto.
     await connection.query(
-      `INSERT INTO resolvedService(value, serviceId, userId, createdAt) VALUES(?, ?, ?, ?)`,
-      [value, serviceId, userId, new Date()]
+      `UPDATE services SET resolved = true, modifiedAt = ? WHERE serviceId = ? AND`
+      [new Date() , serviceId]
     );
   } finally {
     if (connection) connection.release();
