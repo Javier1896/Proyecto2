@@ -20,8 +20,8 @@ const insertResolvedQuery = async (value, serviceId, userId) => {
 
     // Marcamos como resuelto.
     await connection.query(
-      `UPDATE services SET resolved = true, modifiedAt = ? WHERE serviceId = ? AND`
-      [new Date() , serviceId]
+      `UPDATE services SET resolved = true, modifiedAt = ? WHERE Id = ?`,
+      [new Date(), serviceId]
     );
   } finally {
     if (connection) connection.release();

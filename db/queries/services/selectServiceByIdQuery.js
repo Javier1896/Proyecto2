@@ -31,13 +31,21 @@ const selectServiceByIdQuery = async (serviceId, userId = 0) => {
     if (services.length < 1) {
       generateError('Entrada no encontrada', 404);
     }
+     // Buscamos los comentarios del servicio.
+     const [comments] = await connection.query(
+      `SELECT * FROM comments WHERE serviceId = ?`,
+      [services[0].id]
+    )
 
-    return {
-      ...services[0],
-    };
-  } finally {
-    if (connection) connection.release();
-  }
+
+   // Devolvemos los datos del servicio junto al array de comentarios.
+   return {
+    ...services[0],
+    comments
+  };
+} finally {
+  if (connection) connection.release();
+}
 };
 
 module.exports = selectServiceByIdQuery;

@@ -13,7 +13,7 @@ const resolvedService = async (req, res, next) => {
 
     // Si no somos los dueños del servicio lanzamos un error.
     if (!service.owner) {
-      generateError('No puedes finalizar ésta tarea', 403);
+      generateError('No puedes finalizar esta tarea, no eres el autor.', 403);
     }
 
     await insertResolvedQuery (value, serviceId, req.user.id);

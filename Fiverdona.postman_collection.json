@@ -178,13 +178,13 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "{{token_user_01}}",
+								"value": "{{token_user04}}",
 								"type": "default"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"email@gmail.com\"\r\n \r\n  }",
+							"raw": "{\r\n    \"email\": \"fatimafat@email.com\",\r\n    \"username\": \"Fat\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -314,6 +314,82 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Get service",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/services/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"services",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post comment",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/services/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"services",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Resolved service",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token_user04}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/services/6/resolved",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"services",
+								"6",
+								"resolved"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		}
@@ -345,7 +421,17 @@
 			"type": "default"
 		},
 		{
-			"key": "token_user_02",
+			"key": "token_user02",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "token_user03",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "token_user04",
 			"value": "",
 			"type": "default"
 		}

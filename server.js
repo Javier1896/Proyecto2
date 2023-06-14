@@ -66,7 +66,7 @@ const {
 } = require('./controllers/services');
 
 //Ofrece información detallada de un servicio junto a sus comentarios.
-app.get('/services/:serviceId', authUserOptional);
+app.get('/services/:serviceId', getService);
 
 //Crear un nuevo servicio.
 app.post ('/services', authUser, userExists, newService);
