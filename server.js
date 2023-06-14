@@ -12,8 +12,9 @@ app.use(fileUpload());
 
 app.use(morgan('dev'));
 
-// middleware personalizados
+//Middleware personalizados:
 const authUser = require('./middlewares/authUser');
+const authUserOptional = require('./middlewares/authUserOptional');
 const userExists = require('./middlewares/userExists');
 
 const {
@@ -21,16 +22,24 @@ const {
   loginUser,
   getUser,
   getOwnUser,
+  editUser,
   editUserAvatar,
+  editUserPass,
 } = require('./controllers/users');
 
-//Rutas
-//Registro de usuario.
+//Rutas:
 
+//Registro de usuario.
 app.post('/users', newUser);
 
 // Login de usuario.
 app.post('/users/login', loginUser);
+
+// Editar el email o el nombre de usuario.
+app.put('/users', authUser, userExists, editUser);
+
+// Editar contraseña de usuario.
+app.put('/users/password', authUser, userExists, editUserPass);
 
 // Obtener información del perfil de un usuario.
 app.get('/users/:userId', getUser);
@@ -41,15 +50,25 @@ app.get('/users', authUser, userExists, getOwnUser);
 // Editar avatar de usuario.
 app.put('/users/avatar', authUser, userExists, editUserAvatar);
 
-const { newService, newComment } = require('./controllers/services');
+//Middlewares servicios:
 
-//crear nuevo Servicio
+const {
+  newService,
+  listServices,
+  newComment,
+} = require('./controllers/services');
+
+// Crear nuevo Servicio.
 app.post('/services', authUser, userExists, newService);
 
-//Crear nuevo comentario.
-app.post('/services', authUser, userExists, newComment);
+// Listar los servicios.
+app.get('/services', authUserOptional, listServices);
 
-//Middleware de 404
+//Crear un nuevo comentario.
+app.post('/services/:serviceId/comments', authUser, userExists, newComment);
+
+
+//Middleware de 404.
 
 app.use((req, res) => {
   res.status(404).send({
@@ -58,7 +77,7 @@ app.use((req, res) => {
   });
 });
 
-//Middleware de gestión de errores
+//Middleware de gestión de errores.
 
 app.use((error, req, res, next) => {
   console.error(error);
@@ -69,7 +88,7 @@ app.use((error, req, res, next) => {
   });
 });
 
-//Lanzamos el servidor
+//Lanzamos el servidor.
 const process = require('process');
 
 app.listen(process.env.PORT, () => {
