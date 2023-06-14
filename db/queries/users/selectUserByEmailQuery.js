@@ -19,7 +19,7 @@ const selectUserByEmailQuery = async (email) => {
             generateError('Usuario no encontrado', 404);
         }
 
-        // Dado que no puede existir máß de un usuario con el mismo email, en caso de que en el
+        // Dado que no puede existir más de un usuario con el mismo email, en caso de que en el
         // array de usuarios haya un usuario estará en la posición 0.
         return users[0];
     } finally {
