@@ -13,13 +13,14 @@ app.use(fileUpload());
 app.use(morgan('dev'));
 
 
-// middleware personalizados:
+//Middleware personalizados:
+
 const authUser = require('./middlewares/authUser');
 const authUserOptional = require('./middlewares/authUserOptional');
 const userExists = require('./middlewares/userExists');
 
 
-// middlewares usuarios:
+//Middlewares usuarios:
 
 const {
   newUser,
@@ -31,49 +32,50 @@ const {
   editUserPass,
 } = require('./controllers/users');
 
+
 //Rutas:
 
 //Registro de usuario.
 app.post('/users', newUser);
 
-// Login de usuario.
+//Login de usuario.
 app.post('/users/login', loginUser);
 
-// Editar el email o el nombre de usuario.
+//Editar el email o el nombre de usuario.
 app.put('/users', authUser, userExists, editUser);
 
-// Editar contraseña de usuario.
+//Editar contraseña de usuario.
 app.put('/users/password',authUser, userExists, editUserPass)
 
-// Obtener información del perfil de un usuario.
+//Obtener información del perfil de un usuario.
 app.get('/users/:userId', getUser);
 
-// Obtener información del usuario del token (nuestro usuario).
+//Obtener información del usuario del token (nuestro usuario).
 app.get('/users', authUser, userExists, getOwnUser);
 
-
-
-// Editar avatar de usuario.
+//Editar avatar de usuario.
 app.put('/users/avatar', authUser, userExists, editUserAvatar);
 
-// middlewares servicios:
-
+//Middlewares servicios:
 
 const { 
   newService, 
   listServices,
-  getService,
+  resolvedService,
+  getService
 } = require('./controllers/services');
 
-//Ofrece informacion detallada de un servicio junto a sus comentarios.
+//Ofrece información detallada de un servicio junto a sus comentarios.
 app.get('/services/:serviceId', authUserOptional);
 
-// Crear nuevo Servicio.
+//Crear un nuevo servicio.
 app.post ('/services', authUser, userExists, newService);
 
-// Listar los servicios.
+//Listar los servicios.
 app.get('/services', authUserOptional, listServices)
 
+//Finalizar un servicio.
+app.post('/services/:serviceId/resolved', authUser, userExists, resolvedService);
 
 //Middleware de 404
 app.use((req, res) => {
@@ -93,7 +95,7 @@ app.use((error, req, res, next) => {
   });
 });
 
-//Lanzamos el servidor
+//Lanzamos el servidor.
 const process = require('process');
 
 app.listen(process.env.PORT, () => {
