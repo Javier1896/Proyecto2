@@ -10,8 +10,8 @@ const insertResolvedQuery = async (value, serviceId, userId) => {
 
     // Comprobamos si el usuario ya ha finalizado la tarea.
     let [services] = await connection.query(
-      `SELECT resolved FROM services WHERE serviceId = ?`,
-      [userId, entryId]
+      `SELECT resolved FROM services WHERE Id = ?`,
+      [userId, serviceId]
     );
 
     if (services[0].resolved) {
