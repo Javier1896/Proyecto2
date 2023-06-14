@@ -48,7 +48,7 @@ app.post('/services', authUser, userExists, newService);
 
 // Finalizar un servico.
 app.post(
-  '/service/:serviceId/resolveds',
+  '/services/:serviceId/resolved',
   authUser,
   userExists,
   resolvedService
