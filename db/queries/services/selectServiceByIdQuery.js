@@ -35,7 +35,7 @@ const selectServiceByIdQuery = async (serviceId, userId = 0) => {
     // Llegados a este punto sabemos que existe una entrada y que está en la
     // posición 0 del array. Vamos a obtener los archivos (si tiene).
     const [files] = await connection.query(
-      `SELECT id, name FROM servicesFiles WHERE serviceId = ?`,
+      `SELECT id, name FROM services WHERE serviceId = ?`,
       [services[0].id]
     );
 
