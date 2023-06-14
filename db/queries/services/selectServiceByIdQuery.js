@@ -32,13 +32,6 @@ const selectServiceByIdQuery = async (serviceId, userId = 0) => {
       generateError('Entrada no encontrada', 404);
     }
 
-    // Llegados a este punto sabemos que existe una entrada y que está en la
-    // posición 0 del array. Vamos a obtener los archivos (si tiene).
-    const [files] = await connection.query(
-      `SELECT id, name FROM services WHERE serviceId = ?`,
-      [services[0].id]
-    );
-
     // Devolvemos los datos de la entrada junto a sus fotos.
     return {
       ...services[0],
