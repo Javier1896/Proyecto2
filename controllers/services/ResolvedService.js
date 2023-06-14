@@ -16,14 +16,11 @@ const resolvedService = async (req, res, next) => {
       generateError('No puedes finalizar ésta tarea', 403);
     }
 
-  
+    await insertResolvedQuery (value, serviceId, req.user.id);
+    
     res.send({
       status: 'ok',
-      data: {
-        entry: {
-          id: Number(serviceId),
-        },
-      },
+      message: 'Servicio marcado como completado'
     });
   } catch (err) {
     next(err);
