@@ -246,7 +246,7 @@
 			"name": "Servicios",
 			"item": [
 				{
-					"name": "New service",
+					"name": "New Service",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -291,7 +291,7 @@
 					"response": []
 				},
 				{
-					"name": "List services",
+					"name": "List Services",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -316,7 +316,7 @@
 					"response": []
 				},
 				{
-					"name": "Get service",
+					"name": "Get Service",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -336,7 +336,7 @@
 					"response": []
 				},
 				{
-					"name": "Post comment",
+					"name": "Post Comment",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -383,7 +383,7 @@
 					"response": []
 				},
 				{
-					"name": "Resolved service",
+					"name": "Resolved Service",
 					"request": {
 						"method": "POST",
 						"header": [
