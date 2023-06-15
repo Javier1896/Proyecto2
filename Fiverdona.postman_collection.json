@@ -338,10 +338,36 @@
 				{
 					"name": "Post comment",
 					"request": {
-						"method": "GET",
-						"header": [],
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token_user_01}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "text",
+									"value": "otro dia mas",
+									"type": "default"
+								},
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/donce/Desktop/Ojeador deportivo.pdf"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "text"
+								}
+							}
+						},
 						"url": {
-							"raw": "http://localhost:8080/services/3",
+							"raw": "http://localhost:8080/services/3/comments",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -349,7 +375,8 @@
 							"port": "8080",
 							"path": [
 								"services",
-								"3"
+								"3",
+								"comments"
 							]
 						}
 					},
