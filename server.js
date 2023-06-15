@@ -62,7 +62,8 @@ const {
   newService, 
   listServices,
   resolvedService,
-  getService
+  getService,
+  addComment,
 } = require('./controllers/services');
 
 //Ofrece información detallada de un servicio junto a sus comentarios.
@@ -76,6 +77,10 @@ app.get('/services', authUserOptional, listServices)
 
 //Finalizar un servicio.
 app.post('/services/:serviceId/resolved', authUser, userExists, resolvedService);
+
+//Agregar uncomentario a una entrada.
+app.post('/services/:serviceId/comments', authUser, userExists, addComment);
+
 
 //Middleware de 404
 app.use((req, res) => {

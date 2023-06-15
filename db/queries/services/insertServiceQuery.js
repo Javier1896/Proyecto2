@@ -10,7 +10,7 @@ const insertServiceQuery = async (title, description, fileName, userId) => {
 
     // Insertamos el servicio.
     const [service] = await connection.query(
-      `INSERT INTO services (title, description, fileName, userId, createdAt) VALUES(?,?,?,?,?)`,
+      `INSERT INTO services (title, description, fileName, userId, createdAt) VALUES(?, ?, ?, ?, ?)`,
       [title, description, fileName, userId, createdAt]
     );
 

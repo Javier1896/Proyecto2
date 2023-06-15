@@ -15,7 +15,6 @@ const newService = async (req, res, next) => {
 
     if (req.files?.file) {
       fileName = await saveFile(req.files.file);
-      console.log(fileName);
     }
 
     const service = await insertServiceQuery(
