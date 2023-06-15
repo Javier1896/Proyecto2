@@ -1,13 +1,13 @@
 const getDB = require('../../getDB');
 
 const selectAllServicesQuery = async (keyword = '', userId = 0) => {
-    let connection;
+  let connection;
 
-    try {
-        connection = await getDB();
+  try {
+    connection = await getDB();
 
-        const [services] = await connection.query(
-            `
+    const [services] = await connection.query(
+      `
                 SELECT
                     S.id,
                     S.title,
@@ -22,28 +22,13 @@ const selectAllServicesQuery = async (keyword = '', userId = 0) => {
                 GROUP BY S.id
                 ORDER BY S.createdAt DESC
             `,
-            [userId, `%${keyword}%`, `%${keyword}%`]
-        );
+      [userId, `%${keyword}%`, `%${keyword}%`]
+    );
 
-        // Si el array de entradas tiene alguna entrada obtenemos sus fotos y convertimos
-        // a tipo Number la media de votos.
-        /* for (const entry of services) {
-            const [photos] = await connection.query(
-                `SELECT id, name FROM entryPhotos WHERE entryId = ?`,
-                [entry.id]
-            );
-
-            // Agregamos las fotos a la entrada.
-            entry.photos = photos;
-
-            // Convertimos a Number la media de votos.
-            entry.votes = Number(entry.votes);
-        } */
-
-        return services;
-    } finally {
-        if (connection) connection.release();
-    }
+    return services;
+  } finally {
+    if (connection) connection.release();
+  }
 };
 
 module.exports = selectAllServicesQuery;

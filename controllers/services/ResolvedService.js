@@ -16,11 +16,11 @@ const resolvedService = async (req, res, next) => {
       generateError('No puedes finalizar esta tarea, no eres el autor.', 403);
     }
 
-    await insertResolvedQuery (value, serviceId, req.user.id);
-    
+    await insertResolvedQuery(value, serviceId, req.user.id);
+
     res.send({
       status: 'ok',
-      message: 'Servicio marcado como completado'
+      message: 'Servicio marcado como completado.',
     });
   } catch (err) {
     next(err);

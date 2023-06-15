@@ -5,11 +5,8 @@ const { generateError, deletePhoto, savePhoto } = require('../../helpers');
 
 const editUserAvatar = async (req, res, next) => {
   try {
-    // Lanzamos un error si falta el avatar. La propiedad files puede no existir en caso
-    // de que no recibamos ningún archivo. Usamos la interrogación para indicarle a JavaScript
-    // que dicha propiedad puede ser undefined para evitar que se detenga el server con un error.
     if (!req.files?.avatar) {
-      generateError('Faltan campos', 400);
+      generateError('Faltan campos.', 400);
     }
 
     // Obtenemos los datos del usuario para comprobar si ya tiene un avatar previo.
@@ -28,7 +25,7 @@ const editUserAvatar = async (req, res, next) => {
 
     res.send({
       status: 'ok',
-      message: 'Avatar actualizado',
+      message: 'Avatar actualizado.',
     });
   } catch (err) {
     next(err);

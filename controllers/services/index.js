@@ -4,7 +4,7 @@ const getService = require('./getService');
 const resolvedService = require('./resolvedService');
 const addComment = require('./addComment');
 
-module.exports = { 
+module.exports = {
   newService,
   listServices,
   getService,

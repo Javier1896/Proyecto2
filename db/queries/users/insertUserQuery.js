@@ -16,9 +16,8 @@ const insertUserQuery = async (email, username, password) => {
       [email]
     );
 
-    // Si el array de usuarios tiene más de 0 usuarios quiere decir que el email está repetido.
     if (users.length > 0) {
-      generateError('Ya existe un usuario con ese email', 403);
+      generateError('Ya existe un usuario con ese email.', 403);
     }
 
     // Comprobamos si el nombre de usuario está repetido.
@@ -27,9 +26,8 @@ const insertUserQuery = async (email, username, password) => {
       [username]
     );
 
-    // Si el array de usuarios tiene más de 0 usuarios quiere decir que el nombre de usuario está repetido.
     if (users.length > 0) {
-      generateError('Nombre de usuario no disponible', 403);
+      generateError('Nombre de usuario no disponible.', 403);
     }
 
     // Encriptamos la contraseña.

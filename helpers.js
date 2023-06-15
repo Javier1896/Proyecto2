@@ -11,7 +11,7 @@ const generateError = (msg, code) => {
   throw err;
 };
 
-// Validate Schema.
+// Validate schema.
 
 const validateSchema = async (schema, data) => {
   try {
@@ -22,11 +22,7 @@ const validateSchema = async (schema, data) => {
   }
 };
 
-/**
- * ################
- * ## Save Photo ##
- * ################
- */
+// Save Photo.
 
 const savePhoto = async (img, width) => {
   try {
@@ -36,40 +32,27 @@ const savePhoto = async (img, width) => {
     try {
       await fs.access(uploadsPath);
     } catch {
-      // Si el método access lanza un error significa que la directorio no existe.
-      // Lo creamos.
       await fs.mkdir(uploadsPath);
     }
 
-    // Creamos un objeto de tipo Sharp con la imagen dada.
     const sharpImg = sharp(img.data);
 
-    // Redimensionamos la imagen. Width representa un tamaño en píxeles.
     sharpImg.resize(width);
 
-    // Generamos un nombre único para la imagen dado que no podemos guardar dos imágenes
-    // con el mismo nombre en la carpeta uploads.
     const imgName = `${uuid()}.jpg`;
 
-    // Ruta absoluta a la imagen.
     const imgPath = path.join(uploadsPath, imgName);
 
-    // Guardamos la imagen.
     await sharpImg.toFile(imgPath);
 
-    // Retornamos el nombre de la imagen.
     return imgName;
   } catch (err) {
     console.error(err);
-    generateError('Error al guardar la imagen en el servidor', 500);
+    generateError('Error al guardar la imagen en el servidor.', 500);
   }
 };
 
-/**
- * ##################
- * ## Delete Photo ##
- * ##################
- */
+// Delete Photo.
 
 const deletePhoto = async (imgName) => {
   try {
@@ -79,15 +62,13 @@ const deletePhoto = async (imgName) => {
     try {
       await fs.access(imgPath);
     } catch {
-      // Si no existe el archivo finalizamos la función.
       return;
     }
 
-    // Eliminamos el archivo de la carpeta de uploads.
     await fs.unlink(imgPath);
   } catch (err) {
     console.error(err);
-    generateError('Error al eliminar la imagen del servidor', 500);
+    generateError('Error al eliminar la imagen del servidor.', 500);
   }
 };
 
@@ -99,30 +80,22 @@ const saveFile = async (file) => {
     try {
       await fs.access(uploadsPath);
     } catch {
-      // Si el método access lanza un error significa que la directorio no existe.
-      // Lo creamos.
       await fs.mkdir(uploadsPath);
     }
 
-    //Obtenemos la extensión del archivo
-
     const fileExt = file.name.split('.').pop();
 
-    // Generamos un nombre único para el archivo dado que no podemos guardar dos archivos
-    // con el mismo nombre en la carpeta uploads.
     const fileName = `${uuid()}.${fileExt}`;
 
     // Ruta absoluta al archivo.
     const filePath = path.join(uploadsPath, fileName);
 
-    // Guardamos el archivo.
     await file.mv(filePath);
 
-    // Retornamos el nombre del archivo.
     return fileName;
   } catch (err) {
     console.error(err);
-    generateError('Error al guardar el archivo en el servidor', 500);
+    generateError('Error al guardar el archivo en el servidor.', 500);
   }
 };
 

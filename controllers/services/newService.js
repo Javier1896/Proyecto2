@@ -7,10 +7,9 @@ const newService = async (req, res, next) => {
     const { title, description } = req.body;
 
     if (!title || !description) {
-      generateError('Faltan campos', 400);
+      generateError('Faltan campos.', 400);
     }
 
-    // Variable que almacenará un nombre de archivo (si existe).
     let fileName;
 
     if (req.files?.file) {

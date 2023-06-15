@@ -6,21 +6,15 @@ const newUser = async (req, res, next) => {
   try {
     const { email, username, password } = req.body;
 
-
-    //validamos los datos del body con joi.
+    //Validamos los datos del body con joi.
 
     await validateSchema(newUserSchema, req.body);
-
-   // if (!email || !username || !password) {
-   // generateError('Faltan campos', 400);
-   // }
-
 
     await insertUserQuery(email, username, password);
 
     res.send({
       status: 'ok',
-      message: 'Usuario creado',
+      message: 'Usuario creado.',
     });
   } catch (err) {
     next(err);

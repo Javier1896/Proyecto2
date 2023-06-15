@@ -12,15 +12,13 @@ app.use(fileUpload());
 
 app.use(morgan('dev'));
 
-
-//Middleware personalizados:
+//Middlewares personalizados.
 
 const authUser = require('./middlewares/authUser');
 const authUserOptional = require('./middlewares/authUserOptional');
 const userExists = require('./middlewares/userExists');
 
-
-//Middlewares usuarios:
+//Middlewares usuarios.
 
 const {
   newUser,
@@ -31,7 +29,6 @@ const {
   editUserAvatar,
   editUserPass,
 } = require('./controllers/users');
-
 
 //Rutas:
 
@@ -44,8 +41,8 @@ app.post('/users/login', loginUser);
 //Editar el email o el nombre de usuario.
 app.put('/users', authUser, userExists, editUser);
 
-//Editar contraseña de usuario.
-app.put('/users/password',authUser, userExists, editUserPass)
+//Editar la contraseña de usuario.
+app.put('/users/password', authUser, userExists, editUserPass);
 
 //Obtener información del perfil de un usuario.
 app.get('/users/:userId', getUser);
@@ -53,13 +50,13 @@ app.get('/users/:userId', getUser);
 //Obtener información del usuario del token (nuestro usuario).
 app.get('/users', authUser, userExists, getOwnUser);
 
-//Editar avatar de usuario.
+//Editar el avatar de usuario.
 app.put('/users/avatar', authUser, userExists, editUserAvatar);
 
-//Middlewares servicios:
+//Middlewares servicios.
 
-const { 
-  newService, 
+const {
+  newService,
   listServices,
   resolvedService,
   getService,
@@ -70,27 +67,31 @@ const {
 app.get('/services/:serviceId', getService);
 
 //Crear un nuevo servicio.
-app.post ('/services', authUser, userExists, newService);
+app.post('/services', authUser, userExists, newService);
 
 //Listar los servicios.
-app.get('/services', authUserOptional, listServices)
+app.get('/services', authUserOptional, listServices);
 
 //Finalizar un servicio.
-app.post('/services/:serviceId/resolved', authUser, userExists, resolvedService);
+app.post(
+  '/services/:serviceId/resolved',
+  authUser,
+  userExists,
+  resolvedService
+);
 
-//Agregar uncomentario a una entrada.
+//Agregar un comentario a una entrada.
 app.post('/services/:serviceId/comments', authUser, userExists, addComment);
 
-
-//Middleware de 404
+//Middleware de error 404.
 app.use((req, res) => {
   res.status(404).send({
     status: 'error',
-    message: 'Ruta no encontrada',
+    message: 'Ruta no encontrada.',
   });
 });
 
-//Middleware de gestión de errores
+//Middleware de gestión de errores.
 app.use((error, req, res, next) => {
   console.error(error);
 
